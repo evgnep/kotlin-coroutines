@@ -28,6 +28,10 @@ class Ex3Coro {
         return a * 2
     }
 
+    fun x() {
+        //someMethod()
+    }
+
     @Test
     fun coro(): Unit = runBlocking {// ***
         launch {// ***
@@ -45,6 +49,23 @@ class Ex3Coro {
         }.join()
 
         log.info("Complete")
+    }
+
+    fun doSomething(block: suspend (Int) -> Unit) {
+    }
+
+    fun simpleMethod(i: Int) {
+    }
+
+    @Test
+    fun signature(): Unit = runBlocking {
+        val list = listOf(1, 2, 3)
+
+        list.forEach { otherMethod(it) } // это работает, потому что inline
+        //list.forEach (Consumer { otherMethod(it) }) // это не работает, потому что ждут обычную функцию
+
+        doSomething(::otherMethod) // ждут suspend и передаем его
+        doSomething(::simpleMethod) // ждут suspend, передаем обычный метод - это ок, котлин вставит преобразование
     }
 
     @Test
@@ -81,20 +102,4 @@ class Ex3Coro {
         log.info ("COMPLETE ${counter.get()}")
     }
 
-    fun doSomething(block: suspend (Int) -> Unit) {
-    }
-
-    fun simpleMethod(i: Int) {
-    }
-
-    @Test
-    fun signature(): Unit = runBlocking {
-        val list = listOf(1, 2, 3)
-
-        list.forEach { otherMethod(it) } // это работает, потому что inline
-        //list.forEach (Consumer { otherMethod(it) }) // это не работает, потому что ждут обычную функцию
-
-        doSomething(::otherMethod) // ждут suspend и передаем его
-        doSomething(::simpleMethod) // ждут suspend, передаем обычный метод - это ок, котлин вставит преобразование
-    }
 }

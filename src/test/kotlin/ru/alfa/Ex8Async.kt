@@ -47,17 +47,4 @@ class Ex8Async {
 
         log.info("completed: ${res1.await()}, ${res2.await()}")
     }
-
-    @Test
-    fun child(): Unit = runBlocking {// ***
-        launch {
-            launch {
-                delay(100)
-                log.info("child complete")
-            }
-            log.info("parent complete")
-        }.join()
-        log.info("all complete")
-    }
-
 }

@@ -53,8 +53,8 @@ class Ex6Job {
     }
 
     @Test
-    fun cancelTrouble(): Unit = runBlocking {
-        val job1 = launch(Dispatchers.IO) {
+    fun cancelTrouble(): Unit = runBlocking(Dispatchers.Default) {
+        val job1 = launch {
             for (i in 1 .. 1000) {
                 x()
                 //if (!isActive) break
