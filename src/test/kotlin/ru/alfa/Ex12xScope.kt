@@ -139,5 +139,22 @@ class Ex12xScope {
         1 // если бы был runBlocking - были бы проблемы
     }
 
+    @Test
+    fun global() {
+        //val scope = CoroutineScope(Job())
+        val scope = GlobalScope
+
+        scope.launch {
+            Integer.parseInt("a")
+        }
+
+        Thread.sleep(500)
+
+        scope.launch {
+            log.info("hello")
+        }
+
+        Thread.sleep(500)
+    }
 
 }
