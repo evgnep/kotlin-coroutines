@@ -36,7 +36,7 @@ class Ex8Async {
             42
         }
         val res2 = async(start = CoroutineStart.LAZY) {
-            log.info("started")
+            log.info("async2 stated")
             delay(500)
             log.info("async2")
             66
@@ -44,6 +44,8 @@ class Ex8Async {
 
         delay(100)
         log.info("we are here")
+        //res1.start()
+        //res2.start()
 
         log.info("completed: ${res1.await()}, ${res2.await()}")
     }

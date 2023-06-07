@@ -15,7 +15,7 @@ class Ex10Dispatchers {
         repeat(30) {
             launch {
                 log.info("coroutine $it, start")
-                Thread.sleep(100)
+                Thread.sleep(500)
                 log.info("coroutine $it, end")
             }
         }
@@ -37,7 +37,7 @@ class Ex10Dispatchers {
     fun custom() {
         val dispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
         CoroutineScope(Job() + dispatcher).createCoro()
-        Thread.sleep(4000)
+        Thread.sleep(6000)
     }
 
     @Test

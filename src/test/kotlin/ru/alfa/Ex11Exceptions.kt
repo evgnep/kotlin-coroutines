@@ -72,19 +72,6 @@ class Ex11Exceptions {
     }
 
     @Test
-    fun handler3() {
-        val scope = CoroutineScope(Dispatchers.Default + handler("top"))
-        scope.launch(CoroutineName("1")) {
-            launch(handler("child") + CoroutineName("1.1") + SupervisorJob(coroutineContext[Job])) {
-                Integer.parseInt("a")
-            }
-        }
-
-        Thread.sleep(2000)
-        log.info("COMPLETED!")
-    }
-
-    @Test
     fun cancel() {
         val scope = CoroutineScope(Dispatchers.Default + handler("top"))
         scope.launch {
@@ -210,6 +197,19 @@ class Ex11Exceptions {
 
         Thread.sleep(2000)
 
+        log.info("COMPLETED!")
+    }
+
+    @Test
+    fun handler3() {
+        val scope = CoroutineScope(Dispatchers.Default + handler("top"))
+        scope.launch(CoroutineName("1")) {
+            launch(handler("child") + CoroutineName("1.1") + SupervisorJob(coroutineContext[Job])) {
+                Integer.parseInt("a")
+            }
+        }
+
+        Thread.sleep(2000)
         log.info("COMPLETED!")
     }
 
