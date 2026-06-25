@@ -1,6 +1,8 @@
-package ru.alfa
+package ru.otus
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.*
@@ -9,27 +11,18 @@ import kotlinx.coroutines.selects.select
 import mu.KotlinLogging
 import org.junit.Test
 
-class Ex16Select {
+class Ex17Actor {
     private val log = KotlinLogging.logger {}
 
     @Test
     fun test(): Unit = runBlocking {
-        val res = select<String> {
-            async {
-                delay(300)
-                "Hello"
-            }.onAwait { it }
-
-            async {
-                delay(200)
-                "World"
-            }.onAwait  { it }
-
-            onTimeout(1000) {
-                "ops"
-            }
+        val c1: SendChannel<String> = actor<String> {
+            channel.consumeEach { log.info(it) }
         }
-        log.info(res)
+
+        c1.send("Hello")
+        c1.send("world")
+        c1.close()
     }
 
 }

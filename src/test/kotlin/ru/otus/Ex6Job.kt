@@ -1,4 +1,4 @@
-package ru.alfa
+package ru.otus
 
 import kotlinx.coroutines.*
 import mu.KotlinLogging
@@ -37,7 +37,7 @@ class Ex6Job {
     fun dontStart(): Unit = runBlocking {
         val job1 = createJob("1", start = CoroutineStart.LAZY)
         delay(50)
-        //job1.join()
+        job1.join()
     }
 
     @Test
@@ -57,7 +57,7 @@ class Ex6Job {
         val job1 = launch {
             for (i in 1 .. 1000) {
                 x()
-                //if (!isActive) break
+                if (!isActive) break
             }
             log.info("Job complete")
         }
@@ -73,8 +73,8 @@ class Ex6Job {
         scope.createJob("1")
         scope.createJob("2")
 
-        Thread.sleep(500)
-        scope.cancel()
+        Thread.sleep(2000)
+       // scope.cancel()
     }
 
     @Test

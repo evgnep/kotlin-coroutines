@@ -1,4 +1,4 @@
-package ru.alfa
+package ru.otus
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

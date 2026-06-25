@@ -1,4 +1,4 @@
-package ru.alfa
+package ru.otus
 
 import mu.KotlinLogging
 import org.junit.Test

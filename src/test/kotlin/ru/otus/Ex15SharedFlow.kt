@@ -1,4 +1,4 @@
-package ru.alfa
+package ru.otus
 
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce
